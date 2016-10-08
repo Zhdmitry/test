@@ -1,0 +1,62 @@
+<div class="m-t-3"></div>
+
+<div *ngIf="entity" class="col-md-10 col-md-offset-1">
+  
+  <div class="card">
+    <div class="card-header">
+      <strong>Horizontal</strong>Form
+    </div>
+    <div class="card-block">
+      <form class="form-horizontal " (ngSubmit)="onSubmit()" #entityForm="ngForm">
+
+
+        <app-input [placeholder]="'Enter title'" [type]="'text'" [alert]="'Field is required'" [required]="true" (valueChange)="entity.title=$event"
+          [value]="entity.title">
+          Title
+        </app-input>
+
+        <input-file 
+                  [imageUrl]="entity.imageUrl"
+                  [required]="false" (value)="entity.imageUrl=$event"
+                  [screenshotType]='3' >
+          BackgroundImage Url
+        </input-file>
+        <app-select 
+                  *ngIf="sections"
+                  [listValues]="sections" 
+                [value]="entity.sectionId" 
+                  (valueOut)="entity.sectionId=$event">
+          Section
+        </app-select>
+
+        <app-input [placeholder]="'Enter URL'" [type]="'url'" [alert]="'Field is required'" [required]="true" (valueChange)="entity.url=$event"
+          [value]="entity.url">
+          URL
+        </app-input>
+
+        <app-toggle [value]="entity.visible" (valueChange)="entity.visible=$event">
+          Visible
+        </app-toggle>
+
+        <app-input [placeholder]="'Enter URL title'" [type]="'text'" [alert]="'Field is required'" [required]="true" (valueChange)="entity.urlTitle=$event"
+          [value]="entity.urlTitle">
+          URL Title
+        </app-input>
+
+        <button class="btn btn-info btn-sm m-a-2" (click)="showPreview = !showPreview" type="button"><i class="fa fa-eye"></i> Preview</button>
+        <button class="btn btn-info btn-sm m-a-2" (click)="openDemo()" type="button"><i class="fa fa-windows"></i> Open in a window</button>        
+        <iframe *ngIf="showPreview" [src]="url" style="width: 100%; height: 400px;"></iframe>
+
+
+        <div class="card-footer">
+          <button type="submit" [disabled]="submited" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+
+          <button class="btn btn-info pull-right btn-sm" (click)="navRoot()">
+              to list
+            </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

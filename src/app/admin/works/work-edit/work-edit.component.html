@@ -1,0 +1,59 @@
+<div class="m-t-3"></div>
+
+<div *ngIf="entity" class="col-md-10 col-md-offset-1">
+  <div class="card">
+    <div class="card-header">
+      <strong>Horizontal</strong>Form
+    </div>
+    <div class="card-block">
+      <form class="form-horizontal " (ngSubmit)="onSubmit()" #workForm="ngForm">
+        
+        <app-screenshot 
+                      [isTypeSelectable]="true"
+                      [screenshotType]="1"
+                      [id]="entity.id"
+                      [screenshots]="entity.screenshots"
+                      [date]="demoCreated"
+                      (updated)="getEntity()" >
+        </app-screenshot>
+        
+        <app-input [placeholder]="'Enter title'" [type]="'text'" [alert]="'Field is required'" [required]="true" [value]="entity.title"
+          (valueChange)="entity.title=$event">
+          Title
+        </app-input>
+        <!--<div class="form-group row">
+          <label class="col-md-3 form-control-label" for="hf-title Color">Title Color</label>
+            <div class="col-md-9">
+              <input class="form-control" [(colorPicker)]="entity.titleColor" [style.background]="entity.titleColor" />
+            </div>
+        </div>-->
+        <app-input [placeholder]="'Enter description'" [value]="entity.description" [type]="'text'" [alert]="'Field is required'"
+          [required]="true" (valueChange)="entity.description=$event">
+          Description
+        </app-input>
+        <!--<div class="form-group row">
+          <label class="col-md-3 form-control-label" for="hf-descriptionColor">Description Color</label>
+          <div class="col-md-9">
+            <input class="form-control" [(colorPicker)]="entity.descriptionColor" [style.background]="entity.descriptionColor" />
+          </div>
+        </div>-->
+        <!--<div class="form-group row">
+          <label class="col-md-3 form-control-label" for="hf-backgroundColor">Background Color</label>
+          <div class="col-md-9">
+            <input class="form-control" [(colorPicker)]="entity.backgroundColor" [style.background]="entity.backgroundColor" />
+          </div>
+        </div>-->
+
+        <app-toggle [value]="entity.visible" (valueChange)="entity.visible=$event">
+
+          Visible
+        </app-toggle>
+        <div class="card-footer">
+          <button type="submit" [disabled]="submited" class="btn btn-md btn-success"><i class="fa fa-dot-circle-o"></i> Save</button>
+          <button type="submit" [disabled]="submited" class="btn btn-md btn-warning"><i class="fa fa-chevron-left"></i> Back</button>          
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

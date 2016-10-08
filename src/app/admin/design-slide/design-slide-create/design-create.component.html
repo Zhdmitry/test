@@ -1,0 +1,63 @@
+<div class="m-t-3"></div>
+
+<div class="col-md-10 col-md-offset-1">
+  
+  <div class="card">
+  
+    <div class="card-header">
+
+      <strong>Design Slide</strong>Form
+    </div>
+    <div class="card-block">
+      <form class="form-horizontal " (ngSubmit)="onSubmit()" #entityForm="ngForm">
+        
+        <app-input
+                [placeholder]="'Enter title'"
+                [type]="'text'"
+                [alert]="'Title is required'"
+                [required]="true"
+                (valueChange)="entity.title=$event" >
+          Title
+        </app-input>
+
+        <app-select *ngIf="sections" 
+                    [listValues]="sections" 
+                    (valueOut)="entity.sectionId=$event" >
+          Section
+        </app-select>
+
+        <app-input
+                [placeholder]="'Enter description'"
+                [type]="'text'"
+                [alert]="'Description is required'"
+                [required]="true"
+                (valueChange)="entity.description=$event" >
+          Description
+        </app-input>
+
+        <app-input
+                [placeholder]="'Enter screenshots label'"
+                [type]="'text'"
+                [alert]="'Screenshot label is required'"
+                [required]="true"
+                (valueChange)="entity.screenshotsLabel=$event" >
+          Screenshots Label
+        </app-input>
+
+        <app-toggle
+                  [value]="true"
+                  (valueChange)="entity.visible=$event" >
+          Visible
+        </app-toggle>
+
+        <div class="card-footer">
+          <button type="submit" [disabled]="submited" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Continue</button>
+          <button  type="reset" class="btn btn-info pull-right btn-sm" (click)="navRoot()">
+            to list
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

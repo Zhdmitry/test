@@ -1,0 +1,78 @@
+<div class="animated fadeIn">
+    <h4>{{title}}</h4>
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row m-a-0">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-success" [routerLink]="['/admin'+api+'/create']">Create</button>
+                    <button *ngIf="orderChanged" (click)="onOrderSave()" type="button" class="btn btn-warning">Save changes</button>                    
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="filter" name="input2-group2" class="form-control" placeholder="Property" [(ngModel)]="filterProp">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" (click)="filter()">Filter</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td *ngFor="let prop of columns" [ngSwitch]="prop.sortable">
+                                <a class="unselectable" *ngSwitchCase="false">{{prop.displayProperty}}</a>
+                                <a class="sort unselectable" (click)="sort(prop.orderProperty)" *ngSwitchDefault>{{prop.displayProperty}}</a>
+                                <div class="sort" *ngIf="prop.sortable">
+                                    <i class="order" *ngIf="(sortProp == prop.orderProperty && order == 'ASC')" class="icon-arrow-up icons font-2x2"></i>
+                                    <i class="order" *ngIf="(sortProp == prop.orderProperty && order == 'DESC')" class="icon-arrow-down icons font-2x2"></i>
+                                </div>
+                        </td>
+                        <td style="min-width:200px">
+                            Actions
+                        </td>
+                    </tr>
+                </thead>    
+                <tbody *ngIf="entities" dnd-sortable-container [sortableData]="entities">
+                    <tr *ngFor="let u of entities | paginate: { itemsPerPage: itemsPerPage, currentPage: page, totalItems: count }; let i = index" dnd-sortable
+                        [sortableIndex]="i" (onDropSuccess)="onOrderChange()">
+                        <td *ngFor="let prop of columns" [ngSwitch]="prop.dbProperty">
+                            <img *ngSwitchCase="'imageUrl'" 
+                                 src="{{u[prop.dbProperty]}}" 
+                                 style='width:200px;height:200px;object-fit:contain;'>
+                            <p *ngSwitchDefault>{{u[prop.dbProperty]}}</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-md" [routerLink]="['/admin'+api+'/edit/'+u.id]">Edit</button>
+                            <button type="button" class="btn btn-danger btn-md" (click)="onDelete(delModal, u.id)">Delete</button>
+                        </td> 
+                    <tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="getPage($event)" style="display: inline-block;"></pagination-controls>
+            <div class="pull-right">
+                <button 
+                        *ngFor="let opt of paginationOptions" type="button" class="btn btn-default btn-md" 
+                        [ngClass]="{'btn-info': (itemsPerPage===opt)}"
+                        (click)="itemsPerPage=opt">
+                        {{opt}}
+                </button>        
+            </div>
+        </div>
+    </div>
+</div>
+<modal #delModal >
+    <modal-header>
+        <h1>Confirm delete</h1>
+    </modal-header>
+    <modal-content>
+        Do you really want to delete?
+    </modal-content>
+    <modal-footer>
+        <form (ngSubmit)="confirmDelete(delModal)" >
+            <button type="submit" class="btn btn-danger btn-md">Delete</button>
+            <button type="button" class="btn btn-primary btn-md" (click)="delModal.close()">close</button>
+        </form>
+    </modal-footer>
+</modal>

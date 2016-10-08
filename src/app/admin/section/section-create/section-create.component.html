@@ -1,0 +1,51 @@
+<div class="m-t-3"></div>
+
+<div class="col-md-10 col-md-offset-1">
+  
+  <div class="card">
+    <div class="card-header">
+      <strong>Horizontal</strong>Form
+    </div>
+    <div class="card-block">
+      <form class="form-horizontal" (ngSubmit)="onSubmit()" #userForm="ngForm">
+   
+        <app-input
+                [placeholder]="'Enter sectionName'"
+                [type]="'text'"
+                [alert]="'Field is required'"
+                [required]="true"
+                (valueChange)="entity.name=$event" >
+          Name
+        </app-input>
+        <app-select  
+                    *ngIf="demos"
+                    [listValues]="demos"
+                    (valueOut)="entity.demoId=$event">
+          Demos
+        </app-select>
+
+        <input-radio  
+                    [entities]="radioOptions"
+                    (checked)="entity.sectionTypeId=$event" >
+          Section type
+        </input-radio>
+
+        <app-toggle
+                  [value]="true"
+                  (valueChange)="entity.visible=$event" >
+          Visible
+        </app-toggle>
+
+        <div class="card-footer">
+          <button type="submit" [disabled]="submited" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+
+          <button class="btn btn-info pull-right btn-sm" (click)="navRoot()">
+            to list
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

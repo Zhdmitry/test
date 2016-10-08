@@ -1,0 +1,56 @@
+<div class="col-md-10 col-md-offset-1">
+
+  <div class="card">
+    <div class="card-header">
+      <strong>Demo </strong>Form
+    </div>
+    <div class="card-block">
+      <form class="form-horizontal " (ngSubmit)="OnSubmit()" #userForm="ngForm">
+
+        <div *ngIf="formErrors" class="alert alert-danger">
+          {{formErrors?.BackgroundImageUrl|| formErrors?.UrlAlias}}
+
+        </div>
+
+        <app-input [placeholder]="'Enter heading'" [type]="'text'" [alert]="'Field is required'" [required]="true" (valueChange)="entity.heading=$event">
+          Heading
+        </app-input>
+        
+        <!--<div class="form-group row">
+          <label class="col-md-3 form-control-label" for="hf-headingColor">Heading Color</label>
+          <div class="col-md-9">
+            <input class="form-control" [(colorPicker)]="entity.headingColor" [style.background]="entity.headingColor" />
+          </div>
+        </div>-->
+        
+        <app-input [placeholder]="'Enter subheading'" [type]="'text'" [alert]="'Field is required'" [required]="true" (valueChange)="entity.subheading=$event">
+          Subheading
+        </app-input>
+
+        <!--<div class="form-group row">
+          <label class="col-md-3 form-control-label" for="hf-subheadingColor">Subheading Color</label>
+          <div class="col-md-9">
+            <input class="form-control" [(colorPicker)]="entity.subheadingColor" [style.background]="entity.subheadingColor" />
+          </div>
+        </div>-->
+
+        <app-input [placeholder]="'Enter urlAlias'" [type]="'text'" [alert]="'Field is required'" [required]="true" (valueChange)="entity.urlAlias=$event">
+          Url alias
+        </app-input>
+
+        <input-file [screenshotType]='3' (value)="entity.backgroundImageUrl=$event">
+          Background Image URL
+        </input-file>
+        <div class="card-footer">
+          <button type="submit" [disabled]="submited" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+          <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+
+          <button class="btn btn-info pull-right btn-sm" (click)="navRoot()">
+              to list
+            </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

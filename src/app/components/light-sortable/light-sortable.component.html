@@ -1,0 +1,40 @@
+<div class="animated fadeIn">
+    <h5>{{title}}</h5>
+    <div class="card card-default">
+        <div class="card-header">
+            <div class="row m-a-0">
+                <div class="col-md-6">
+                    <button *ngIf="orderChanged" (click)="onOrderSave()" type="button" class="btn btn-warning">Save changes</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-block">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td *ngFor="let prop of properties" class="sort unselectable">
+                            {{prop}}
+                        </td>
+                        <td style="min-width:200px">
+                            Actions
+                        </td>
+                    </tr>
+                </thead>
+                <tbody *ngIf="entities" dnd-sortable-container [sortableData]="entities">
+                    <tr *ngFor="let u of entities; let i = index"
+                        dnd-sortable [sortableIndex]="i" (onDropSuccess)="onOrderChange()">
+                        <td *ngFor="let prop of properties" [ngSwitch]="prop">
+                            <img *ngSwitchCase="'imageUrl'" 
+                                 src="{{u[prop]}}" 
+                                 style='width:200px;height:200px;object-fit:contain;'>
+                            <p *ngSwitchDefault>{{u[prop]}}</p>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" (click)="onDelete(u.id)"> X </button>
+                        </td>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
