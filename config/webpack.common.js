@@ -31,7 +31,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: helpers.root('src', 'app'),
-                loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+                loaders:[ ExtractTextPlugin.extract('style', 'css?sourceMap'),'to-string','css']
             },
             {
                 test: /\.css$/,

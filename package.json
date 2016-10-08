@@ -50,7 +50,7 @@
     "gulp-shell": "^0.5.2",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.15.0",
-    "ng2-datepicker": "^1.1.0",
+    "ng2-datepicker": "https://github.com/sanohin/ng2-datepicker.git",
     "ng2-dnd": "^2.0.1",
     "ng2-modal": "0.0.21",
     "ng2-pagination": "^0.5.1",

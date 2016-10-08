@@ -101,7 +101,7 @@ import {
     SelectComponent,
     LightSortableComponent,
     RadioComponent,
-    // DatePicker,
+    DatePicker,
     ImageListComponent,
 
     DemoComponent,
